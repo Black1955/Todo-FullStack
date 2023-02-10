@@ -1,24 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import "./App.scss";
+import ButtonRouter from "./ui/buttonRouter/ButtonRouter";
+import { FiSettings } from "react-icons/fi";
+import Filter from "./ui/filter/Filter";
+import CheckBox from "./ui/ckeckbox/CheckBox";
+import MyInput from "./ui/MyInput/MyInput";
+import MyTask from "./ui/Task/MyTask";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <MyTask color='#fac608' content='Read 5 pages of "spring"' time='8pm' />
+      <MyTask color='#fac608' content='Read 5 pages of "spring"' time='8pm' />
     </div>
   );
 }
