@@ -11,6 +11,6 @@
   border-radius: 50%;
 }
 
-input:checked {
+input[type="checkbox"]:checked {
   background: url("../../assets/icons8-checkmark.svg") center;
 }

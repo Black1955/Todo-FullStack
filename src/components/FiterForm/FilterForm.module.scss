@@ -1,0 +1,38 @@
+@import "../../assets/variables.module";
+
+.form {
+  display: flex;
+  margin-top: 30px;
+  padding: 0 4px;
+}
+
+.select {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  appearance: none;
+  border: none;
+  margin-right: 15px;
+}
+
+.select:active,
+.select:focus {
+  outline: none;
+}
+
+.input {
+  width: 100px;
+  border: none;
+  outline: none;
+  color: $MyDarkBlue;
+  opacity: 1;
+  font-size: 1rem;
+}
+
+.button {
+  border: none;
+  background-color: #fff;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}

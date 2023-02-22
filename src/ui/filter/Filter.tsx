@@ -7,7 +7,6 @@ const Filter = ({ color, text }: IFilter) => {
     <label
       className={styles.label}
       style={{
-        //backgroundColor: checked ? "red" : "",
         opacity: checked ? 1 : 0.5,
       }}
     >
@@ -18,9 +17,7 @@ const Filter = ({ color, text }: IFilter) => {
         className={styles.input}
         style={{ backgroundColor: color }}
       />
-      <div className={styles.oleg} style={{ marginLeft: "15px" }}>
-        {text}
-      </div>
+      <div style={{ marginLeft: "15px" }}>{text}</div>
     </label>
   );
 };

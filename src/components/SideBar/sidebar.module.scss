@@ -1,0 +1,33 @@
+@import "../../assets/variables.module";
+
+.siderBar {
+  display: inline-flex;
+  justify-content: center;
+  height: 98vh;
+  width: 350px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #fff;
+}
+.profile {
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.photo {
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.line {
+  width: 200px;
+  height: 2px;
+  border-radius: 10px;
+  background-color: $MyDarkBlue;
+  margin: 40px auto;
+}
+
+.managment {
+  margin-top: 50px;
+}

@@ -1,0 +1,28 @@
+@import "../../assets/variables.module";
+
+.form {
+  background-color: #fff;
+  display: inline-flex;
+  padding: 13px 12px;
+  border-radius: 17px;
+  width: 700px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.select {
+  margin-right: 10px;
+}
+
+.button {
+  height: 100%;
+  margin-left: 15px;
+  border: none;
+  background-color: $MyLightBlue;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 1rem;
+  color: $MyDarkBlue;
+  cursor: pointer;
+}

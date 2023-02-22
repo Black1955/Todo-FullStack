@@ -1,0 +1,13 @@
+.select {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  appearance: none;
+  border: none;
+  margin-right: 15px;
+}
+
+.select:active,
+.select:focus {
+  outline: none;
+}
