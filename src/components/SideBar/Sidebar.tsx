@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./sidebar.module.scss";
 import { TbCalendarTime } from "react-icons/tb";
 import { BsCalendar3Event } from "react-icons/bs";
@@ -8,7 +7,14 @@ import ButtonRouter from "../../ui/buttonRouter/ButtonRouter";
 import photo from "../../assets/DefaultPhoto.jpg";
 import FilterForm from "../FiterForm/FilterForm";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
+import { useGetUserDataQuery } from "../../Services/userSlice";
 const Sidebar = () => {
+  const { id } = useAppSelector(state => state.user);
+  const { data, isLoading } = useGetUserDataQuery(id);
+  if (isLoading) {
+    return <h1>loading...</h1>;
+  }
   return (
     <div className={styles.siderBar}>
       <div className={styles.wrapper}>
@@ -19,7 +25,7 @@ const Sidebar = () => {
           <div>
             <span>Do-it</span>
             <br />
-            <span style={{ fontWeight: "bold" }}>Hamza mameri</span>
+            <span style={{ fontWeight: "bold" }}>{data.name}</span>
           </div>
         </div>
         <div className={styles.line}></div>

@@ -1,33 +1,29 @@
-import React, { useState } from "react";
-import styles from "../Login/loginForm.module.scss";
-import { Navigate } from "react-router-dom";
-import { useRegistrationMutation } from "../../Services/userSlice";
-function RegistrationForm() {
+import { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import styles from "./loginForm.module.scss";
+import { useLoginMutation } from "../../Services/userSlice";
+const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [registration, { isSuccess, data }] = useRegistrationMutation();
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
+  const [login, { isSuccess, data }] = useLoginMutation();
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     const credentials = {
       email,
       password,
-      name: nickname,
     };
-    registration(credentials);
+    login(credentials);
   };
-
   if (isSuccess) {
     localStorage.setItem("token", data!);
     return <Navigate to='/' />;
   }
-
   return (
     <div>
       <div className={styles.window}>
         <div className={styles.wrapper}>
           <form className={styles.Form} onSubmit={handleSubmit}>
-            <h2>Create an Account</h2>
+            <h2>Login</h2>
             <div className={styles.formField}>
               <label htmlFor='email'>Email</label>
               <input
@@ -50,25 +46,18 @@ function RegistrationForm() {
                 required
               />
             </div>
-            <div className={styles.formField}>
-              <label htmlFor='nickname'>Nickname</label>
-              <input
-                type='text'
-                id='nickname'
-                name='nickname'
-                value={nickname}
-                onChange={event => setNickname(event.target.value)}
-                required
-              />
-            </div>
             <button className={styles.button} type='submit' onClick={() => {}}>
-              Register
+              Login
             </button>
+            <span className={styles.or}>or</span>
+            <Link to='/registration' style={{ textDecoration: "none" }}>
+              <button className={styles.createButton}>Signup</button>
+            </Link>
           </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default RegistrationForm;
+export default LoginForm;

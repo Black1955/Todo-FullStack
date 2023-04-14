@@ -1,19 +1,14 @@
-import React from "react";
-import Sidebar from "../../components/SideBar/Sidebar";
 import Tasks from "../../components/tasks/Tasks";
+import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
+import { useGetAllTodoQuery } from "../../Services/todoSlice";
 
 const SheduledTasks = () => {
-  const tasks = [
-    { date: "2022-01-01", color: "", time: "", content: "" },
-    { date: "2022-01-02", color: "", time: "", content: "" },
-    { date: "2022-01-01", color: "", time: "", content: "" },
-    { date: "2022-01-03", color: "", time: "", content: "" },
-  ];
+  const { id } = useAppSelector(state => state.user);
+  const { data = [] } = useGetAllTodoQuery(id);
 
   interface ObjectWithDateField {
     date: string;
     color: string;
-    time: string;
     content: string;
     [key: string]: any;
   }
@@ -29,8 +24,7 @@ const SheduledTasks = () => {
     });
     return Object.values(grouped);
   }
-  const oleg = groupByDate(tasks);
-  console.log(oleg);
+  const tasks = groupByDate(data);
   return (
     <div style={{ width: "100%" }}>
       <div
@@ -40,9 +34,15 @@ const SheduledTasks = () => {
           flexDirection: "column",
         }}
       >
-        {oleg.map(tasks => {
-          return <Tasks date={tasks[0].date} tasks={tasks} />;
-        })}
+        {tasks.length !== 0 ? (
+          tasks.map(tasks => {
+            return <Tasks date={tasks[0].date} tasks={tasks} />;
+          })
+        ) : (
+          <div style={{ fontSize: "50px", color: "#fff", fontWeight: "bold" }}>
+            you steel haven`t had tasks
+          </div>
+        )}
       </div>
     </div>
   );

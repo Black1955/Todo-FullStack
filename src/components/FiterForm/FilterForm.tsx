@@ -2,42 +2,41 @@ import React, { useState } from "react";
 import styles from "./FilterForm.module.scss";
 import { BsCheck2 } from "react-icons/bs";
 import MySelect from "../../ui/select/MySelect";
-const colors = [
-  { color: "#fac608" },
-  { color: "#3fd4f4" },
-  { color: "#717082" },
-];
+import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
+import { useActions } from "../../hooks/useActions/useActions";
 const FilterForm = () => {
-  const [value, setValue] = useState("");
+  const { colors } = useAppSelector(state => state.filter);
+  const { createFilter } = useActions();
+  const [text, setText] = useState("");
   const [selectValue, setSelectValue] = useState<string>("");
-
   const getColor = (color: any) => {
     setSelectValue(color);
   };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (!value) {
+    if (!text) {
       return;
     }
-    setValue("");
+    createFilter({ color: selectValue, text: text, active: false });
+    setText("");
   };
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <MySelect colors={colors} getColor={getColor} />
       <input
-        value={value}
-        onChange={e => setValue(e.target.value)}
+        value={text}
+        onChange={e => setText(e.target.value)}
         type='text'
         className={styles.input}
         placeholder='Add filter'
       />
-      {value ? (
+      {text ? (
         <button className={styles.button}>
           <BsCheck2 width='15px' height='15px' />
         </button>
       ) : (
-        ""
+        <div></div>
       )}
     </form>
   );

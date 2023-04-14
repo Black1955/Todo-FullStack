@@ -1,17 +1,15 @@
 import React from "react";
 import Filter from "../../ui/filter/Filter";
-import colors from "../../assets/_variables.module.scss";
-const filters: any[] = [
-  { color: colors.MyPink, text: "Personal", id: Date.now() },
-  { color: colors.MyLightBlue, text: "Freelance", id: Date.now() + 1 },
-  { color: colors.MyYellow, text: "work", id: Date.now() + 2 },
-];
-
+import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 const Filters = () => {
+  const { filters } = useAppSelector(state => state.filter);
+  if (!filters.length) {
+    return <div>there aren`t filters</div>;
+  }
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {filters.map(filter => (
-        <Filter color={filter.color} text={filter.text} key={filter.id} />
+        <Filter color={filter.color} text={filter.text} key={filter.color} />
       ))}
     </div>
   );

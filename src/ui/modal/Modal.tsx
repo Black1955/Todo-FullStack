@@ -4,7 +4,7 @@ import "./modal.scss";
 interface IModal {
   active: boolean;
   setActive: (arg: boolean) => void;
-  getData: (arg: object) => void;
+  getData: (arg: string) => void;
 }
 
 const Modal = ({ active, setActive, getData = f => f }: IModal) => {
@@ -16,12 +16,8 @@ const Modal = ({ active, setActive, getData = f => f }: IModal) => {
     if (!time || !date) {
       return;
     }
-    const data = {
-      time,
-      date,
-    };
+    const data = date + " " + time;
     getData(data);
-    console.log(`Time: ${time}, Date: ${date}`);
     setActive(false);
   };
 

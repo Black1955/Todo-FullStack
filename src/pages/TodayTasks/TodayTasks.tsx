@@ -1,31 +1,35 @@
-import React, { useState } from "react";
-import Sidebar from "../../components/SideBar/Sidebar";
 import TaskForm from "../../components/TaskForm/TaskForm";
-import { IMyTask } from "../../ui/Task/IMyTask";
+import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import MyTask from "../../ui/Task/MyTask";
 import styles from "./todayTasks.module.scss";
+import { useGetAllTodoQuery } from "../../Services/todoSlice";
+import { useRef } from "react";
+import "overlayscrollbars/overlayscrollbars.css";
+import useScroll from "../../hooks/useScroll/useScroll";
 const TodayTasks = () => {
-  const [tasks, setTasks] = useState<IMyTask[]>([
-    { color: "#fd99af", content: "Work out", time: "8:00 am", id: 1 },
-    {
-      color: "#fac608",
-      content: "Design team meeting",
-      time: "2:30 pm",
-      id: 2,
-    },
-    {
-      color: "#3fd4f4",
-      content: "Hang off the project",
-      time: "7:00 pm",
-      id: 3,
-    },
-    {
-      color: "#fd99af",
-      content: 'Read 5 pages of "spring"',
-      time: "10:30 pm",
-      id: 4,
-    },
-  ]);
+  const currDate = new Date(Date.now()).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+  const { id } = useAppSelector(state => state.user);
+
+  const { data } = useGetAllTodoQuery(id, {
+    selectFromResult: ({ data }) => ({
+      data: data?.filter(
+        item =>
+          new Date(item.date).toLocaleDateString("en-US", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          }) === currDate
+      ),
+    }),
+  });
+
+  const hasScroll = data === undefined ? false : data.length < 4 ? false : true;
+  const todoWrapper = useRef(null);
+  useScroll(todoWrapper, hasScroll);
   return (
     <div
       style={{
@@ -37,16 +41,16 @@ const TodayTasks = () => {
           Today main focus <br /> <span>Desing team meeting</span>
         </h1>
         <TaskForm />
-        <div>
-          {tasks.length === 0 ? (
+        <div ref={todoWrapper} style={{ height: hasScroll ? "400px" : "auto" }}>
+          {data?.length === 0 ? (
             <h1>No tasks for today</h1>
           ) : (
-            tasks.map(task => {
+            data?.map(task => {
               return (
                 <MyTask
                   color={task.color}
                   content={task.content}
-                  time={task.time}
+                  date={task.date}
                   key={task.id}
                 />
               );

@@ -1,5 +1,4 @@
-import { ComponentProps, ElementType, ReactNode } from "react";
-import { IconType } from "react-icons";
+import { ReactNode } from "react";
 
 export interface IButtonRouter {
   icon: ReactNode;
