@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions/useActions";
 import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import { useGetIdMutation } from "../../Services/userSlice";
