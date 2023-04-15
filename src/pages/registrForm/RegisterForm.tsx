@@ -23,7 +23,7 @@ function RegistrationForm() {
   }
 
   return (
-    <div>
+    <div className={styles.login}>
       <div className={styles.window}>
         <div className={styles.wrapper}>
           <form className={styles.Form} onSubmit={handleSubmit}>

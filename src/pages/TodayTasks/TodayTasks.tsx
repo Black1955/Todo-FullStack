@@ -37,7 +37,7 @@ const TodayTasks = () => {
       }}
     >
       <div className={styles.content}>
-        <h1 style={{ marginBottom: "60px", color: "#fff" }}>
+        <h1 className={styles.header}>
           Today main focus <br /> <span>Desing team meeting</span>
         </h1>
         <TaskForm />

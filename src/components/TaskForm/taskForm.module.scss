@@ -26,3 +26,15 @@
   color: $MyDarkBlue;
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .form {
+    width: 425px;
+  }
+}
+
+@media (max-width: 464px) {
+  .form {
+    width: 320px;
+  }
+}

@@ -19,3 +19,18 @@
 .time {
   margin-right: 30px;
 }
+
+@media (max-width: 767px) {
+  .task {
+    width: 350px;
+  }
+}
+
+@media (max-width: 464px) {
+  .task {
+    width: 300px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1.1rem;
+  }
+}

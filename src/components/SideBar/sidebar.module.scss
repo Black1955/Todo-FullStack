@@ -3,7 +3,7 @@
 .siderBar {
   display: inline-flex;
   justify-content: center;
-  height: 98vh;
+  height: 100vh;
   width: 350px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -30,4 +30,10 @@
 
 .managment {
   margin-top: 50px;
+}
+
+@media (max-width: 1023px) {
+  .siderBar {
+    display: none;
+  }
 }
