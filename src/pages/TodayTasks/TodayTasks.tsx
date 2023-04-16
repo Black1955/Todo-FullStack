@@ -43,7 +43,7 @@ const TodayTasks = () => {
         <TaskForm />
         <div ref={todoWrapper} style={{ height: hasScroll ? "400px" : "auto" }}>
           {data?.length === 0 ? (
-            <h1>No tasks for today</h1>
+            <h1 className={styles.noTasks}>No tasks for today</h1>
           ) : (
             data?.map(task => {
               return (

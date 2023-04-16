@@ -11,8 +11,12 @@
 }
 
 @media (max-width: 464px) {
+  .noTasks,
   .header {
     font-size: 30px;
+  }
+
+  .header {
     margin-bottom: 40px;
   }
 }
