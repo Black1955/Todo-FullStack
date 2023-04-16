@@ -9,14 +9,21 @@ import FilterForm from "../FiterForm/FilterForm";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import { useGetUserDataQuery } from "../../Services/userSlice";
-const Sidebar = () => {
+interface ISide {
+  bar: boolean;
+}
+const Sidebar: React.FC<ISide> = ({ bar }) => {
   const { id } = useAppSelector(state => state.user);
   const { data, isLoading } = useGetUserDataQuery(id);
   if (isLoading) {
     return <h1>loading...</h1>;
   }
   return (
-    <div className={styles.siderBar}>
+    <div
+      className={
+        bar ? [styles.siderBar, styles.active].join(" ") : styles.siderBar
+      }
+    >
       <div className={styles.wrapper}>
         <div className={styles.profile}>
           <div className={styles.photo}>

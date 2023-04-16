@@ -4,13 +4,15 @@ import { useActions } from "../../hooks/useActions/useActions";
 import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import { useGetIdMutation } from "../../Services/userSlice";
 import Sidebar from "../SideBar/Sidebar";
-
+import styles from "./layout.module.scss";
+import { RxHamburgerMenu } from "react-icons/rx";
 const Layout = () => {
   const [getId] = useGetIdMutation();
   const { UpdateId } = useActions();
   const { id } = useAppSelector(state => state.user);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
+  const [bar, setBar] = useState<boolean>(false);
   useEffect(() => {
     !token && setLoading(false);
     if (token) {
@@ -26,9 +28,12 @@ const Layout = () => {
   }
   return id ? (
     <div style={{ display: "flex", width: "100%" }}>
-      <Sidebar />
+      <Sidebar bar={bar} />
       <div style={{ alignItems: "center", display: "flex", width: "100%" }}>
         <Outlet />
+      </div>
+      <div onClick={() => setBar(!bar)} className={styles.burger}>
+        <RxHamburgerMenu color='black' size={30} />
       </div>
     </div>
   ) : (

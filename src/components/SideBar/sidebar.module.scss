@@ -34,6 +34,12 @@
 
 @media (max-width: 1023px) {
   .siderBar {
-    display: none;
+    position: fixed;
+    left: -100%;
+    transition: left 1s;
+  }
+  .active {
+    left: 0;
+    width: 100%;
   }
 }
