@@ -3,9 +3,7 @@ import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import MyTask from "../../ui/Task/MyTask";
 import styles from "./todayTasks.module.scss";
 import { useGetAllTodoQuery } from "../../Services/todoSlice";
-import { useRef } from "react";
 import "overlayscrollbars/overlayscrollbars.css";
-import useScroll from "../../hooks/useScroll/useScroll";
 const TodayTasks = () => {
   const currDate = new Date(Date.now()).toLocaleDateString("en-US", {
     day: "numeric",
@@ -27,9 +25,6 @@ const TodayTasks = () => {
     }),
   });
 
-  const hasScroll = data === undefined ? false : data.length < 4 ? false : true;
-  const todoWrapper = useRef(null);
-  useScroll(todoWrapper, hasScroll);
   return (
     <div
       style={{
@@ -41,7 +36,7 @@ const TodayTasks = () => {
           Today main focus <br /> <span>Desing team meeting</span>
         </h1>
         <TaskForm />
-        <div ref={todoWrapper} style={{ height: hasScroll ? "400px" : "auto" }}>
+        <div>
           {data?.length === 0 ? (
             <h1 className={styles.noTasks}>No tasks for today</h1>
           ) : (

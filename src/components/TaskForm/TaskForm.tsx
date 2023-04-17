@@ -34,7 +34,7 @@ const TaskForm = () => {
   return (
     <form onSubmit={onsubmit} className={styles.form}>
       <div style={{ alignItems: "center", display: "flex" }}>
-        <MySelect getColor={setColor} colors={colors} />
+        <MySelect onChange={setColor} options={colors} />
         <MyInput
           placeholder='What is your next task?'
           id={5}

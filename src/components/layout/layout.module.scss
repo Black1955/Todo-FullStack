@@ -2,6 +2,7 @@
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 11;
   margin: 15px 15px 0px 0px;
   cursor: pointer;
   @media (min-width: 1024px) {
@@ -9,6 +10,5 @@
   }
   @media (max-width: 320px) {
     margin: 5px 5px 0px 0px;
-    z-index: 10;
   }
 }

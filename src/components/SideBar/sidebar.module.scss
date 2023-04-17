@@ -37,9 +37,12 @@
     position: fixed;
     left: -120%;
     transition: left 1s;
+    z-index: 10;
   }
   .active {
     left: 0;
     width: 100%;
+    overflow: hidden;
+    z-index: 10;
   }
 }

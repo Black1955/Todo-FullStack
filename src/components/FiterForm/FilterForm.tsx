@@ -15,7 +15,7 @@ const FilterForm = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (!text) {
+    if (!text || !selectValue) {
       return;
     }
     createFilter({ color: selectValue, text: text, active: false });
@@ -23,13 +23,13 @@ const FilterForm = () => {
   };
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <MySelect colors={colors} getColor={getColor} />
+      <MySelect options={colors} onChange={getColor} />
       <input
         value={text}
         onChange={e => setText(e.target.value)}
         type='text'
         className={styles.input}
-        placeholder='Add filter'
+        placeholder='add filter'
       />
       {text ? (
         <button className={styles.button}>

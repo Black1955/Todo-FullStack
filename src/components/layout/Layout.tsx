@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions/useActions";
 import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
@@ -28,10 +28,19 @@ const Layout = () => {
   }
   return id ? (
     <div style={{ display: "flex", width: "100%" }}>
-      <Sidebar bar={bar} />
-      <div style={{ alignItems: "center", display: "flex", width: "100%" }}>
-        <Outlet />
-      </div>
+      <Sidebar bar={bar} setBar={setBar} />
+      <Suspense>
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            width: "100%",
+            overflow: bar ? "hidden" : "auto",
+          }}
+        >
+          <Outlet />
+        </div>
+      </Suspense>
       <div onClick={() => setBar(!bar)} className={styles.burger}>
         <RxHamburgerMenu color='black' size={30} />
       </div>

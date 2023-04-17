@@ -1,44 +1,58 @@
 import { useEffect, useState } from "react";
-import { IMYSelect } from "./IMySelect";
 import styles from "./select.module.scss";
-
-const MySelect: React.FC<IMYSelect> = ({ colors, getColor = f => f }) => {
-  const [selectValue, setSelectValue] = useState<string>(
-    colors.length ? colors[0].color : ""
+import { CustomSelectProps, Icolor } from "./IMySelect";
+function MySelect({ options, onChange }: CustomSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<Icolor | null>(
+    options.length ? options[0] : null
   );
-
   useEffect(() => {
-    if (colors.length) {
-      setSelectValue(colors[0].color);
-      getColor(colors[0].color);
+    if (options.length > 0 && selectedOption === null) {
+      setSelectedOption(options[0]);
+      onChange(options[0].color);
     }
-  }, [colors]);
+  }, [options]);
+  useEffect(() => {
+    if (options.length) {
+      onChange(options[0].color);
+    }
+  }, []);
+  function toggleSelect() {
+    setIsOpen(!isOpen);
+  }
 
-  const sendColor = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newColor = e.target.value;
-    console.log(newColor);
-    setSelectValue(newColor);
-    getColor(newColor);
-  };
+  function handleOptionClick(option: Icolor) {
+    setSelectedOption(option);
+    setIsOpen(false);
+    onChange(option.color);
+  }
 
-  return colors.length ? (
-    <select
-      className={styles.select}
-      style={{ backgroundColor: selectValue }}
-      value={selectValue}
-      onChange={sendColor}
-    >
-      {colors.map(color => (
-        <option
-          style={{ backgroundColor: color.color, border: "none" }}
-          value={color.color}
-          key={color.color}
-        ></option>
-      ))}
-    </select>
-  ) : (
-    <div>no filters</div>
+  return (
+    <div className={styles.customSelect}>
+      <div
+        style={{
+          backgroundColor:
+            selectedOption !== null ? selectedOption.color : "#fff",
+        }}
+        className={styles.selectedOption}
+        onClick={toggleSelect}
+      ></div>
+      <div className={styles.optionsContainer}>
+        {isOpen && (
+          <div className={styles.options}>
+            {options.map(option => (
+              <div
+                key={option.color}
+                style={{ backgroundColor: option.color }}
+                className={styles.option}
+                onClick={() => handleOptionClick(option)}
+              ></div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
-};
+}
 
 export default MySelect;

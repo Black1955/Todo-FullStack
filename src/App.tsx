@@ -1,10 +1,11 @@
+import { lazy } from "react";
 import "./App.scss";
-import RegistrationForm from "./pages/registrForm/RegisterForm";
-import SheduledTasks from "./pages/SheduledTasks/SheduledTasks";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import TodayTasks from "./pages/TodayTasks/TodayTasks";
-import LoginForm from "./pages/Login/LoginForm";
+const SheduledTasks = lazy(() => import("./pages/SheduledTasks/SheduledTasks"));
+const RegistrationForm = lazy(() => import("./pages/registrForm/RegisterForm"));
+const TodayTasks = lazy(() => import("./pages/TodayTasks/TodayTasks"));
+const LoginForm = lazy(() => import("./pages/Login/LoginForm"));
 
 function App() {
   return (

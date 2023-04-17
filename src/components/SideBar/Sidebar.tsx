@@ -11,8 +11,9 @@ import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import { useGetUserDataQuery } from "../../Services/userSlice";
 interface ISide {
   bar: boolean;
+  setBar: (value: boolean) => void;
 }
-const Sidebar: React.FC<ISide> = ({ bar }) => {
+const Sidebar: React.FC<ISide> = ({ bar, setBar }) => {
   const { id } = useAppSelector(state => state.user);
   const { data, isLoading } = useGetUserDataQuery(id);
   if (isLoading) {
@@ -40,7 +41,9 @@ const Sidebar: React.FC<ISide> = ({ bar }) => {
           <Link to='/' style={{ textDecoration: "none" }}>
             <ButtonRouter
               icon={<BsCalendar3Event color='' />}
-              onClick={() => {}}
+              onClick={() => {
+                setBar(!bar);
+              }}
               text='Today tasks'
             />
           </Link>
@@ -51,14 +54,18 @@ const Sidebar: React.FC<ISide> = ({ bar }) => {
           <Link to='sheduledTasks' style={{ textDecoration: "none" }}>
             <ButtonRouter
               icon={<TbCalendarTime />}
-              onClick={() => {}}
+              onClick={() => {
+                setBar(!bar);
+              }}
               text='Scheduled tasks'
             />
           </Link>
           <Link to='settings' style={{ textDecoration: "none" }}>
             <ButtonRouter
               icon={<FiSettings />}
-              onClick={() => {}}
+              onClick={() => {
+                setBar(!bar);
+              }}
               text='Settings'
             />
           </Link>
