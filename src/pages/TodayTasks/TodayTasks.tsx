@@ -3,7 +3,6 @@ import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import MyTask from "../../ui/Task/MyTask";
 import styles from "./todayTasks.module.scss";
 import { useGetAllTodoQuery } from "../../Services/todoSlice";
-import "overlayscrollbars/overlayscrollbars.css";
 const TodayTasks = () => {
   const currDate = new Date(Date.now()).toLocaleDateString("en-US", {
     day: "numeric",
