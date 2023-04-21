@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IFilter } from "./IFilter";
 import styles from "./Filter.module.scss";
-const Filter = ({ color, text }: IFilter) => {
+const Filter = ({ color, text, getData }: IFilter) => {
   const [checked, SetChecked] = useState<boolean>(false);
+  useEffect(() => {
+    getData({ color, checked });
+  }, [checked]);
   return (
     <label
       className={styles.label}

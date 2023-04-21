@@ -10,7 +10,6 @@ const TodayTasks = () => {
     year: "numeric",
   });
   const { id } = useAppSelector(state => state.user);
-
   const { data } = useGetAllTodoQuery(id, {
     selectFromResult: ({ data }) => ({
       data: data?.filter(

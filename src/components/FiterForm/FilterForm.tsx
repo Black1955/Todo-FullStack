@@ -6,7 +6,7 @@ import { useAppSelector } from "../../hooks/useAppSelector/useAppSelector";
 import { useActions } from "../../hooks/useActions/useActions";
 const FilterForm = () => {
   const { colors } = useAppSelector(state => state.filter);
-  const { createFilter } = useActions();
+  const { createFilter, deleteColor } = useActions();
   const [text, setText] = useState("");
   const [selectValue, setSelectValue] = useState<string>("");
   const getColor = (color: any) => {
@@ -19,6 +19,7 @@ const FilterForm = () => {
       return;
     }
     createFilter({ color: selectValue, text: text, active: false });
+    deleteColor({ color: selectValue });
     setText("");
   };
   return (

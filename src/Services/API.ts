@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-const PORT = "https://todobackend.adaptable.app";
+const PORT = "http://localhost:5000/";
 export const API = createApi({
   reducerPath: "splitApi",
   baseQuery: fetchBaseQuery({
