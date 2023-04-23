@@ -21,7 +21,13 @@ export const todoSlice = API.injectEndpoints({
     }),
 
     getAllTodo: build.query({
-      query: userId => `/tasks/${userId}`,
+      query: ({ userId, activeFilters = [] }) => {
+        let url = `/tasks/${userId}`;
+        if (activeFilters.length) {
+          url += `?color=${activeFilters.join(",").replace(/#/g, "%23")}`;
+        }
+        return url;
+      },
       transformResponse: (response: response) => {
         return response.tasks;
       },

@@ -28,9 +28,6 @@ const TaskForm = () => {
     setColor("");
     setText("");
   };
-  useEffect(() => {
-    console.log(color);
-  }, [color]);
   return (
     <form onSubmit={onsubmit} className={styles.form}>
       <div style={{ alignItems: "center", display: "flex" }}>

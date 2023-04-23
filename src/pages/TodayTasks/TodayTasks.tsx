@@ -10,18 +10,26 @@ const TodayTasks = () => {
     year: "numeric",
   });
   const { id } = useAppSelector(state => state.user);
-  const { data } = useGetAllTodoQuery(id, {
-    selectFromResult: ({ data }) => ({
-      data: data?.filter(
-        item =>
-          new Date(item.date).toLocaleDateString("en-US", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          }) === currDate
-      ),
-    }),
-  });
+  const { filters } = useAppSelector(state => state.filter);
+
+  const TrueFilters = filters
+    .filter(filter => filter.active === true)
+    .map(filter => filter.color);
+  const { data } = useGetAllTodoQuery(
+    { userId: id, activeFilters: TrueFilters },
+    {
+      selectFromResult: ({ data }) => ({
+        data: data?.filter(
+          item =>
+            new Date(item.date).toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            }) === currDate
+        ),
+      }),
+    }
+  );
 
   return (
     <div

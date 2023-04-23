@@ -4,8 +4,14 @@ import { useGetAllTodoQuery } from "../../Services/todoSlice";
 
 const SheduledTasks = () => {
   const { id } = useAppSelector(state => state.user);
-  const { data = [] } = useGetAllTodoQuery(id);
-
+  const { filters } = useAppSelector(state => state.filter);
+  const TrueFilters = filters
+    .filter(filter => filter.active === true)
+    .map(filter => filter.color);
+  const { data = [] } = useGetAllTodoQuery({
+    userId: id,
+    activeFilters: TrueFilters,
+  });
   interface ObjectWithDateField {
     date: string;
     color: string;
@@ -36,11 +42,13 @@ const SheduledTasks = () => {
       >
         {tasks.length !== 0 ? (
           tasks.map(tasks => {
-            return <Tasks date={tasks[0].date} tasks={tasks} />;
+            return (
+              <Tasks date={tasks[0].date} tasks={tasks} key={tasks[0].date} />
+            );
           })
         ) : (
           <div style={{ fontSize: "50px", color: "#fff", fontWeight: "bold" }}>
-            you steel haven`t had tasks
+            you still haven`t had tasks
           </div>
         )}
       </div>
