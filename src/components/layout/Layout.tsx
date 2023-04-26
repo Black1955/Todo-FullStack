@@ -29,18 +29,16 @@ const Layout = () => {
   return id ? (
     <div style={{ display: "flex", width: "100%" }}>
       <Sidebar bar={bar} setBar={setBar} />
-      <Suspense>
-        <div
-          style={{
-            alignItems: "center",
-            display: "flex",
-            width: "100%",
-            overflow: bar ? "hidden" : "auto",
-          }}
-        >
-          <Outlet />
-        </div>
-      </Suspense>
+      <div
+        style={{
+          alignItems: "center",
+          display: "flex",
+          width: "100%",
+          overflow: bar ? "hidden" : "auto",
+        }}
+      >
+        <Outlet />
+      </div>
       <div onClick={() => setBar(!bar)} className={styles.burger}>
         <RxHamburgerMenu color='black' size={30} />
       </div>
